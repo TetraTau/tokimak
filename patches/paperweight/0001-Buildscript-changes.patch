@@ -1,0 +1,31 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Denery <dorofeevij@gmail.com>
+Date: Sat, 4 Mar 2023 19:50:38 +0300
+Subject: [PATCH] Buildscript changes
+
+
+diff --git a/paperweight-userdev/build.gradle.kts b/paperweight-userdev/build.gradle.kts
+index dbe8fc245477a8a7f0e80892950be09087e9cbf5..cbf40355030b208c2fc5712eef94ca70447090ba 100644
+--- a/paperweight-userdev/build.gradle.kts
++++ b/paperweight-userdev/build.gradle.kts
+@@ -4,7 +4,7 @@ plugins {
+ }
+ 
+ dependencies {
+-    shade(projects.paperweightLib)
++    shade(project(":paperweight-plugin:paperweight-lib"))
+     implementation(libs.kotson)
+     implementation("net.minecraftforge:DiffPatch:2.0.7:all") {
+         isTransitive = false
+diff --git a/settings.gradle.kts b/settings.gradle.kts
+deleted file mode 100644
+index dc42541c5f6984ca2cd7eb8faf071ed7a8dcd890..0000000000000000000000000000000000000000
+--- a/settings.gradle.kts
++++ /dev/null
+@@ -1,6 +0,0 @@
+-rootProject.name = "paperweight"
+-
+-include("paperweight-core", "paperweight-lib", "paperweight-patcher", "paperweight-userdev")
+-
+-enableFeaturePreview("VERSION_CATALOGS")
+-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

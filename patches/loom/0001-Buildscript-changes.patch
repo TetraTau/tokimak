@@ -1,0 +1,47 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Denery <dorofeevij@gmail.com>
+Date: Sat, 4 Mar 2023 00:30:42 +0300
+Subject: [PATCH] Buildscript changes
+
+
+diff --git a/build.gradle b/build.gradle
+index 10a6e0c0dc68d863684b37e904396fb7b1cab39f..b1cb936f9dc98a5953b2c6eda53df2d59356d9fc 100644
+--- a/build.gradle
++++ b/build.gradle
+@@ -8,7 +8,7 @@ plugins {
+ 	id 'checkstyle'
+ 	id 'jacoco'
+ 	id 'codenarc'
+-	id "org.jetbrains.kotlin.jvm" version "1.6.10" // Must match the version included with gradle.
++	id "org.jetbrains.kotlin.jvm" // version "1.6.10" // Must match the version included with gradle. // Tokimak
+ 	id "com.diffplug.spotless" version "6.13.0"
+ 	id "org.gradle.test-retry" version "1.5.1"
+ }
+@@ -60,7 +60,7 @@ configurations.all {
+ dependencies {
+ 	implementation gradleApi()
+ 
+-	bootstrap project(":bootstrap")
++	bootstrap project(":plugin:bootstrap") // Tokimak
+ 
+ 	// libraries
+ 	implementation ('commons-io:commons-io:2.11.0')
+@@ -307,7 +307,7 @@ task writeActionsTestMatrix() {
+ 	}
+ }
+ 
+-tasks.named('wrapper') {
++rootProject.tasks.named('wrapper') { // Tokimak
+ 	distributionType = Wrapper.DistributionType.ALL
+ }
+ 
+diff --git a/settings.gradle b/settings.gradle
+deleted file mode 100644
+index 885070a6d762361cb5edf6ce1f85a72e5b353407..0000000000000000000000000000000000000000
+--- a/settings.gradle
++++ /dev/null
+@@ -1,3 +0,0 @@
+-rootProject.name = name
+-
+-include "bootstrap"
+\ No newline at end of file

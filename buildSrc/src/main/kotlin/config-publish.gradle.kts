@@ -35,7 +35,7 @@ fun ShadowJar.configureStandard() {
 
 val sourcesJar by tasks.existing(AbstractArchiveTask::class) {
     from(
-        zipTree(project(":paperweight-lib").tasks
+        zipTree(project(":plugin:paperweight-lib").tasks
             .named("sourcesJar", AbstractArchiveTask::class)
             .flatMap { it.archiveFile })
     ) {
@@ -49,9 +49,9 @@ gradlePlugin {
     website.set("https://github.com/PaperMC/paperweight")
     vcsUrl.set("https://github.com/PaperMC/paperweight")
     plugins.create("paperweight-$prefix") {
-        id = "io.papermc.paperweight." + prefix
-        displayName = "paperweight $prefix"
-        tags.set(listOf("paper", "minecraft"))
+        id = "net.tetratau.tokimak." + prefix
+        displayName = "tokimak $prefix"
+        tags.set(listOf("toki", "minecraft"))
     }
 }
 
