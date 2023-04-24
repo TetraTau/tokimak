@@ -4,3 +4,6 @@
 [submodule "paperweight"]
 	path = paperweight
 	url = https://github.com/PaperMC/paperweight.git
+[submodule "fabric-mixin-compile-extensions"]
+	path = fabric-mixin-compile-extensions
+	url = https://github.com/FabricMC/fabric-mixin-compile-extensions.git

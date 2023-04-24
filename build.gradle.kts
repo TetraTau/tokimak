@@ -1,3 +1,4 @@
+
 import net.minecrell.gitpatcher.task.FindGitTask
 import net.minecrell.gitpatcher.task.UpdateSubmodulesTask
 import net.minecrell.gitpatcher.task.patch.ApplyPatchesTask
@@ -16,12 +17,12 @@ repositories {
 }
 
 patches {
-    submodule = "fabric-loom"
-    target = file("plugin")
-    patches = file("patches/loom")
+    submodule = "paperweight"
+    target = file("paperweight-plugin")
+    patches = file("patches/paperweight")
 }
 
-createPatchTasks(rootProject, "paperweight", file("paperweight-plugin"), file("patches/paperweight"))
+createPatchTasks(rootProject, "fabric-mixin-compile-extensions", file("compile-extensions"), file("patches/compile-extensions"))
 
 fun createPatchTasks(project: Project, submodule: String, target: File, patches: File) {
     project.withGroovyBuilder {

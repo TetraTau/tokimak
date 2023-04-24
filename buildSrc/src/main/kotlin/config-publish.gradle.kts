@@ -32,16 +32,17 @@ fun ShadowJar.configureStandard() {
 
     mergeServiceFiles()
 }
-
+/*
 val sourcesJar by tasks.existing(AbstractArchiveTask::class) {
     from(
-        zipTree(project(":plugin:paperweight-lib").tasks
+        zipTree(project(":paperweight-plugin").tasks
             .named("sourcesJar", AbstractArchiveTask::class)
             .flatMap { it.archiveFile })
     ) {
         exclude("META-INF/**")
     }
 }
+*/*/
 
 val prefix = project.name.substringAfter("paperweight-")
 

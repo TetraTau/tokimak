@@ -1,0 +1,77 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Denery <dorofeevij@gmail.com>
+Date: Mon, 24 Apr 2023 20:25:35 +0300
+Subject: [PATCH] All changes
+
+
+diff --git a/build.gradle b/build.gradle
+index bf8d04df98901d3e22730ec3181d807cb788b94e..a0b545208c65278f1b9b57c9fe64326798a50afa 100644
+--- a/build.gradle
++++ b/build.gradle
+@@ -8,12 +8,12 @@ plugins {
+ sourceCompatibility = 1.8
+ targetCompatibility = 1.8
+ 
+-group = 'net.fabricmc'
++group = 'net.tetratau.toki'
+ archivesBaseName = project.name
+ version = '0.6.0'
+ 
+ def ENV = System.getenv()
+-version = version + (ENV.GITHUB_ACTIONS ? "" : "+local")
++// version = version + (ENV.GITHUB_ACTIONS ? "" : "+local")
+ 
+ repositories {
+ 	maven {
+diff --git a/gradle.properties b/gradle.properties
+index 8074cf0b335eafd515f3fa5469809137f4afdeb4..9b9e2c00a6baf79d5b43b543ceafc7cc35e36b49 100644
+--- a/gradle.properties
++++ b/gradle.properties
+@@ -1,4 +1,4 @@
+-name = fabric-mixin-compile-extensions
++name = toki-mixin-compile-extensions
+ description = Extensions for the Mixin annotation processor
+ url = https://github.com/FabricMC/fabric-mixin-compile-extensions
+ 
+diff --git a/settings.gradle b/settings.gradle
+deleted file mode 100644
+index 89f41106979dc5b9b46343bc03dc2271e25fcf3b..0000000000000000000000000000000000000000
+--- a/settings.gradle
++++ /dev/null
+@@ -1 +0,0 @@
+-rootProject.name = name
+diff --git a/src/main/java/net/fabricmc/loom/mixin/MixinMappingProviderTiny.java b/src/main/java/net/fabricmc/loom/mixin/MixinMappingProviderTiny.java
+index a58c611cad7d1507c773e1cfb73d8c9475d159c0..1e0e5c342052e7f9556e009b597d0f446ea6c51f 100644
+--- a/src/main/java/net/fabricmc/loom/mixin/MixinMappingProviderTiny.java
++++ b/src/main/java/net/fabricmc/loom/mixin/MixinMappingProviderTiny.java
+@@ -172,7 +172,7 @@ public class MixinMappingProviderTiny extends MappingProvider {
+ 
+ 		for (MappingTree.ClassMapping cls : tree.getClasses()) {
+ 			String fromClass = cls.getName(fromId);
+-			String toClass = cls.getName(to);
++			String toClass = cls.getName(toId);
+ 			classMap.put(fromClass, toClass);
+ 
+ 			for (MappingTree.FieldMapping field : cls.getFields()) {
+diff --git a/src/main/java/net/fabricmc/loom/mixin/ObfuscationServiceFabric.java b/src/main/java/net/fabricmc/loom/mixin/ObfuscationServiceFabric.java
+index 4532f408253718010efffd87b6e6ff78dc3e6484..36840fdec3d8ad823abaa07e66df8aaae4b5d25a 100644
+--- a/src/main/java/net/fabricmc/loom/mixin/ObfuscationServiceFabric.java
++++ b/src/main/java/net/fabricmc/loom/mixin/ObfuscationServiceFabric.java
+@@ -68,6 +68,7 @@ public class ObfuscationServiceFabric implements IObfuscationService {
+ 		addSupportedOptions(options, "intermediary", "named");
+ 		addSupportedOptions(options, "named", "official");
+ 		addSupportedOptions(options, "named", "intermediary");
++		addSupportedOptions(options, "mojang", "spigot");
+ 		return Collections.unmodifiableSet(options);
+ 	}
+ 
+@@ -84,7 +85,8 @@ public class ObfuscationServiceFabric implements IObfuscationService {
+ 				createObfuscationType("intermediary", "official"),
+ 				createObfuscationType("intermediary", "named"),
+ 				createObfuscationType("named", "official"),
+-				createObfuscationType("named", "intermediary")
++				createObfuscationType("named", "intermediary"),
++				createObfuscationType("mojang", "spigot")
+ 		);
+ 	}
+ }

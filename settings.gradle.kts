@@ -7,11 +7,10 @@ pluginManagement {
 
 rootProject.name = "tokimak"
 
-include(":plugin")
-include(":plugin:bootstrap")
 include(":paperweight-plugin")
 include(":paperweight-plugin:paperweight-lib")
 include(":paperweight-plugin:paperweight-userdev")
+include(":compile-extensions")
 
 enableFeaturePreview("VERSION_CATALOGS")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
