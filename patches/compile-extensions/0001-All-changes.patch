@@ -5,7 +5,7 @@ Subject: [PATCH] All changes
 
 
 diff --git a/build.gradle b/build.gradle
-index bf8d04df98901d3e22730ec3181d807cb788b94e..a0b545208c65278f1b9b57c9fe64326798a50afa 100644
+index bf8d04df98901d3e22730ec3181d807cb788b94e..86e9c14a0048e6f2d3dcad34227fb437bc2dec53 100644
 --- a/build.gradle
 +++ b/build.gradle
 @@ -8,12 +8,12 @@ plugins {
@@ -23,6 +23,26 @@ index bf8d04df98901d3e22730ec3181d807cb788b94e..a0b545208c65278f1b9b57c9fe643267
  
  repositories {
  	maven {
+@@ -66,13 +66,12 @@ publishing {
+ 		}
+ 	}
+ 	repositories {
+-		if (ENV.MAVEN_URL) {
+-			maven {
+-				url ENV.MAVEN_URL
+-				credentials {
+-					username ENV.MAVEN_USERNAME
+-					password ENV.MAVEN_PASSWORD
+-				}
++		maven {
++			name = "tetratau"
++			url "https://mvn.tetratau.net/releases"
++			credentials(PasswordCredentials)
++			authentication {
++				basic(BasicAuthentication)
+ 			}
+ 		}
+ 	}
 diff --git a/gradle.properties b/gradle.properties
 index 8074cf0b335eafd515f3fa5469809137f4afdeb4..9b9e2c00a6baf79d5b43b543ceafc7cc35e36b49 100644
 --- a/gradle.properties

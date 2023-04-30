@@ -47,8 +47,8 @@ val sourcesJar by tasks.existing(AbstractArchiveTask::class) {
 val prefix = project.name.substringAfter("paperweight-")
 
 gradlePlugin {
-    website.set("https://github.com/PaperMC/paperweight")
-    vcsUrl.set("https://github.com/PaperMC/paperweight")
+    website.set("https://github.com/TetraTau/tokimak")
+    vcsUrl.set("https://github.com/TetraTau/tokimak")
     plugins.create("paperweight-$prefix") {
         id = "net.tetratau.tokimak." + prefix
         displayName = "tokimak $prefix"
@@ -94,9 +94,12 @@ val shadowJar by tasks.existing(ShadowJar::class) {
 
 publishing {
     repositories {
-        maven("https://repo.papermc.io/repository/maven-snapshots/") {
+        maven("https://mvn.tetratau.net/releases") {
             credentials(PasswordCredentials::class)
-            name = "paper"
+            name = "tetratau"
+            authentication {
+                create<BasicAuthentication>("basic")
+            }
         }
     }
 
@@ -110,19 +113,24 @@ publishing {
 }
 
 fun MavenPom.pomConfig() {
-    val repoPath = "PaperMC/paperweight"
+    val repoPath = "TetraTau/tokimak"
     val repoUrl = "https://github.com/$repoPath"
 
     name.set("paperweight")
-    description.set("Gradle plugin for the PaperMC project")
+    description.set("A fork of Paperweight with the support of Toki's modding possibilities")
     url.set(repoUrl)
-    inceptionYear.set("2020")
+    inceptionYear.set("2023")
 
     licenses {
         license {
             name.set("LGPLv2.1")
-            url.set("$repoUrl/blob/master/license/LGPLv2.1.txt")
+            url.set("$repoUrl/blob/master/licenses/LGPLv2.1.txt")
             distribution.set("repo")
+        }
+
+        license {
+            name.set("Apache-2.0")
+            url.set("$repoUrl/blob/master/LICENSE")
         }
     }
 
@@ -137,6 +145,13 @@ fun MavenPom.pomConfig() {
             name.set("Kyle Wood")
             email.set("kyle@denwav.dev")
             url.set("https://github.com/DenWav")
+        }
+
+        developer {
+            id.set("Denery")
+            name.set("Daniel Dorofeev")
+            email.set("dorofeevij@gmail.com")
+            url.set("https://github.com/maestro-denery")
         }
     }
 
