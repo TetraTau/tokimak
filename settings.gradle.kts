@@ -7,6 +7,9 @@ pluginManagement {
 
 rootProject.name = "tokimak"
 
+include(":plugin")
+include(":plugin:bootstrap")
+include(":tokimak-core")
 include(":paperweight-plugin")
 include(":paperweight-plugin:paperweight-lib")
 include(":paperweight-plugin:paperweight-userdev")
