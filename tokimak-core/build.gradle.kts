@@ -1,16 +1,17 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
-
 plugins {
     `java-library`
+    `config-kotlin`
     id("com.github.johnrengelman.shadow")
     id("com.gradle.plugin-publish")
 }
 
 group = "net.tetratau.tokimak.core"
-version = "0.1.0-SNAPSHOT"
+version = "0.1.1-SNAPSHOT"
 
 repositories {
+    mavenCentral()
     maven("https://mvn.tetratau.net/releases")
 }
 
@@ -93,6 +94,23 @@ fun MavenPom.pomConfig() {
 
 
 dependencies {
-    implementation("net.tetratau.toki:toki-installer:0.1.0-SNAPSHOT")
-    compileOnly(gradleApi())
+    implementation("net.tetratau.toki:toki-installer:0.1.1-SNAPSHOT")
+    implementation(libs.httpclient)
+    implementation(libs.kotson)
+
+    // ASM for inspection
+    implementation(libs.bundles.asm)
+
+    implementation(libs.bundles.hypo)
+    implementation(libs.slf4j.jdk14) // slf4j impl for hypo
+    implementation(libs.bundles.cadix)
+
+    implementation(libs.lorenzTiny)
+
+    implementation(libs.jbsdiff)
+
+    implementation("net.minecraftforge:DiffPatch:2.0.7:all") {
+        isTransitive = false
+    }
 }
+
